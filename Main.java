@@ -1,18 +1,16 @@
 package fileordatabase;
 
 import fileordatabase.database.ContactDatabase;
-import fileordatabase.file.ContactFile;
-
-
 import java.util.Scanner;
 
 /**
  * Created by Elham on 4/5/2020.
  */
 public class Main {
+    static Scanner in = new Scanner(System.in);
 
-    public static void choose(Client fileOrDatabase){
-        Scanner in = new Scanner(System.in);
+    private static void choose(Persistent fileOrDatabase){
+
         System.out.println("Please choose one of the insert,delete,show: ");
         String choise,count = "y";
 
@@ -20,7 +18,7 @@ public class Main {
             choise = in.nextLine();
             switch (choise) {
                 case "show":
-                    fileOrDatabase.show();
+                    fileOrDatabase.getAllPerson();
                     break;
                 case "delete":
                     fileOrDatabase.delete();
@@ -38,26 +36,11 @@ public class Main {
 
 
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
 
-            try {
-                Scanner in = new Scanner(System.in);
-                System.out.println("This is your contact! ");
-                System.out.println("Save to File or Database F/D: ");
-                String choose = in.nextLine();
+        System.out.println("This is your contact! ");
+        Persistent database2 = new ContactDatabase();
+        choose(database2);
 
-                switch (choose) {
-                    case "F":
-                        Client file = new ContactFile();
-                        choose(file);
-                        break;
-
-                    case "D":
-                        Client database2 = new ContactDatabase();
-                        choose(database2);
-                        break;
-                }
-
-            }catch (Exception e){}
-        }
     }
+}
