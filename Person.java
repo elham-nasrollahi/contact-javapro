@@ -4,6 +4,8 @@ package fileordatabase;
  * Created by Elham on 3/22/2020.
  */
  public class Person {
+
+    public int personid;
     public String firstname;
     public String lastname;
     public String phonenumber;
@@ -35,10 +37,19 @@ package fileordatabase;
     }
 
 
+    public int getPersonid() {
+        return personid;
+    }
+
+    public void setPersonid(int personid) {
+        this.personid = personid;
+    }
+
     @Override
     public String toString() {
         return "Person{" +
-                "firstname='" + firstname + '\'' +
+                "ID='" + personid + '\'' +
+                ", firstname='" + firstname + '\'' +
                 ", lastname='" + lastname + '\'' +
                 ", phonenumber='" + phonenumber + '\'' +
                 '}';

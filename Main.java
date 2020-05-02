@@ -26,6 +26,7 @@ public class Main {
         List<Person> personList = daoImpl.getAllPerson();
         for (Person person : personList) {
             Person person1 =new Person();
+            person1.setPersonid(person.getPersonid());
             person1.setFirstname(person.getFirstname().toUpperCase());
             person1.setLastname(person.getLastname().toUpperCase());
             person1.setPhonenumber(person.getPhonenumber());
@@ -39,6 +40,7 @@ public class Main {
         List<Person> personList = daoImpl.getAllPerson();
         for (Person person : personList) {
             Person person1 =new Person();
+            person1.setPersonid(person.getPersonid());
             person1.setFirstname(person.getFirstname().toLowerCase());
             person1.setLastname(person.getLastname().toLowerCase());
             person1.setPhonenumber(person.getPhonenumber());
@@ -47,6 +49,24 @@ public class Main {
         }
 
     }
+
+    private void editRecord() {
+
+        Person person = new Person();
+        System.out.println("Insert the member whose you want to edit:");
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("ID: ");
+        person.setPersonid(scanner.nextInt());
+        System.out.println("Firstname: ");
+        person.setFirstname(scanner.next());
+        System.out.println("Lastname: ");
+        person.setLastname(scanner.next());
+        System.out.println("Phonenumber: ");
+        person.setPhonenumber(scanner.next());
+        daoImpl.update(person);
+        System.out.println("The member was edited successfully! ");
+    }
+
 
 
     private void show(List<Person> personList) {
@@ -64,7 +84,7 @@ public class Main {
         String choise,count = "y";
 
         while (count.equalsIgnoreCase("y")) {
-            System.out.println("Please choose one of the insert,delete,show,uppercase,lowercase: ");
+            System.out.println("Please choose one of the insert,delete,show,uppercase,lowercase,edit: ");
             choise = scanner.nextLine();
             switch (choise) {
                 case "show":
@@ -82,6 +102,9 @@ public class Main {
                     break;
                 case "l":
                     lowerCase();
+                    break;
+                case "e":
+                    editRecord();
                     break;
                 default:
                     System.out.println("Wrong input!");

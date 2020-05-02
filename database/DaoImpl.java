@@ -28,6 +28,7 @@ import java.util.*;
             while (rs.next()){
 
                 Person person = new Person();
+                person.setPersonid(rs.getInt("id"));
                 person.setFirstname(rs.getString("firstname"));
                 person.setLastname(rs.getString("lastname"));
                 person.setPhonenumber(rs.getString("phonenumber"));
@@ -35,7 +36,9 @@ import java.util.*;
 
             }
 
-        }catch (SQLException e){}
+        }catch (SQLException e){
+            System.out.println("Cannot connect ! ");
+        }
 
         return personList;
     }
@@ -45,14 +48,16 @@ import java.util.*;
 
         try {
 
-            System.out.println("Enter the FirstName: ");
-            String firstname = scanner.next();
-            PreparedStatement st = connection.prepareStatement("DELETE FROM mycontact WHERE firstname = ?");
-            st.setString(1, firstname);
+            System.out.println("Enter the personID: ");
+            int id = scanner.nextInt();
+            PreparedStatement st = connection.prepareStatement("DELETE FROM mycontact WHERE ID = ?");
+            st.setInt(1, id);
             st.executeUpdate();
-            System.out.println(firstname + " was deleted!");
+            System.out.println(id + " was deleted!");
 
-        }catch (SQLException e){}
+        }catch (SQLException e){
+            System.out.println("Cannot connect ! ");
+        }
     }
 
     public void insert() {
@@ -66,26 +71,31 @@ import java.util.*;
                 System.out.println("Enter the PhoneNumber: ");
                 person.setPhonenumber(scanner.next());
 
-                PreparedStatement st = connection.prepareStatement("INSERT INTO mycontact VALUES (?,?,?)");
+                PreparedStatement st = connection.prepareStatement("INSERT INTO mycontact VALUES (?,?,?,SEQ_PERSON.nextval)");
                 st.setString(1, person.getFirstname());
                 st.setString(2, person.getLastname());
                 st.setString(3, person.getPhonenumber());
                 st.executeUpdate();
                 System.out.println(person.getFirstname() + " " + person.getLastname() + " was added!");
 
-            }catch (SQLException e){}
+            }catch (SQLException e){
+                System.out.println("Cannot connect ! ");
+            }
     }
 
     public void update(Person person) {
 
-        //Person person = new Person();
         try {
-            PreparedStatement st = connection.prepareStatement("UPDATE mycontact SET firstname = ? , lastname = ? WHERE phonenumber = ?" );
+            PreparedStatement st = connection.prepareStatement("UPDATE mycontact SET firstname = ? , lastname = ? , phonenumber = ? WHERE ID =?" );
             st.setString(1, person.getFirstname());
             st.setString(2, person.getLastname());
             st.setString(3, person.getPhonenumber());
+            st.setInt(4, person.getPersonid());
             st.executeUpdate();
-        }catch (SQLException e){}
+
+        }catch (SQLException e){
+            System.out.println("Cannot connect ! ");
+        }
 
 
     }
