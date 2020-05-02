@@ -6,7 +6,7 @@ import java.util.Set;
 /**
  * Created by Elham on 4/7/2020.
  */
-public interface Persistent {
+public interface IDao {
 
 
     List<Person> getAllPerson();
@@ -14,4 +14,7 @@ public interface Persistent {
     void delete();
 
     void insert();
+
+    void update(Person person);
+
 }

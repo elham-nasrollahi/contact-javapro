@@ -34,4 +34,13 @@ package fileordatabase;
         this.phonenumber = phonenumber;
     }
 
+
+    @Override
+    public String toString() {
+        return "Person{" +
+                "firstname='" + firstname + '\'' +
+                ", lastname='" + lastname + '\'' +
+                ", phonenumber='" + phonenumber + '\'' +
+                '}';
+    }
 }
